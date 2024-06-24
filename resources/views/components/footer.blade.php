@@ -1,4 +1,4 @@
-<footer class="p-4 mx-4 my-6 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8">
+{{-- <footer class="p-4 mx-4 my-6 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8">
     <ul class="flex flex-wrap items-center mb-6 md:mb-0">
         <li><a href="#" class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6">Terms and
                 conditions</a></li>
@@ -45,7 +45,7 @@
             </svg>
         </a>
     </div>
-</footer>
+</footer> --}}
 <p class="my-10 text-sm text-center text-gray-500">
     &copy; {{ date('Y') }} <a href="#" class="hover:underline">Ladisa
         Busaina</a>

@@ -9,7 +9,7 @@
                 Indonesia</span>
             {{-- <h3 class="text-base font-normal text-gray-500">Sales this week</h3> --}}
         </div>
-        <div class="flex items-center justify-start flex-1 text-base font-bold text-green-500 gap-x-2">
+        <div class="flex flex-wrap items-center justify-start flex-1 text-base font-bold text-green-500 gap-x-2">
             {{-- dropdown kapal --}}
             <div class="relative dropdown-kapal">
                 <button id="dropdownSearchButtonKapal" data-dropdown-toggle="dropdownSearchKapal"
@@ -270,11 +270,13 @@
                 if (window.chart311) {
                     window.chart311.updateSeries([{
                             name: 'Kapal Masuk',
-                            data: kapalMasuk
+                            data: kapalMasuk,
+                            color: '#45C8FF'
                         },
                         {
                             name: 'Kapal Keluar',
-                            data: kapalKeluar
+                            data: kapalKeluar,
+                            color: '#544FC5'
                         }
                     ]);
                     window.chart311.updateOptions({

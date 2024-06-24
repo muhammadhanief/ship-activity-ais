@@ -67,27 +67,7 @@ class Chart321 extends Component
 
         $chartData = $this->getChartData();
         // dd($chartData);
-        $this->dispatch('chart321Update', ['chartData' => $chartData]);
-    }
-
-    public function dispatchAwal()
-    {
-        if (empty($this->selectedKapal) || empty($this->selectedPendekatan) || empty($this->selectedPelabuhan)) {
-            $chartData = [
-                'categories' => [],
-                'series' => [
-                    ['name' => 'Kapal Masuk', 'data' => []],
-                    ['name' => 'Kapal Keluar', 'data' => []],
-                ],
-            ];
-            // dd($chartData);
-            $this->dispatch('chart321Update', ['chartData' => $chartData]);
-            return;
-        }
-
-        $chartData = $this->getChartData();
-        // dd($chartData);
-        $this->dispatch('chart321Awal', ['chartData' => $chartData]);
+        $this->dispatch('chart321Update', $chartData);
     }
 
     public function getChartData()
@@ -130,7 +110,7 @@ class Chart321 extends Component
         $kapalOptions = masukKeluarIndoPerTipeKapal::pluck('Kapal')->unique();
         $pendekatanOptions = masukKeluarIndoPerTipeKapal::pluck('Pendekatan')->unique();
         $pelabuhanOptions = masukKeluarIndoPerTipeKapal::pluck('Pelabuhan')->unique();
-        $this->dispatchAwal();
+        $this->dispatch321();
         return view('livewire.masuk-keluar.chart321', compact('kapalOptions', 'pendekatanOptions', 'pelabuhanOptions'));
     }
 }

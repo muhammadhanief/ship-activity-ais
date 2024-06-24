@@ -9,7 +9,7 @@
                 Tipe Kapal</span>
             {{-- <h3 class="text-base font-normal text-gray-500">Sales this week</h3> --}}
         </div>
-        <div class="flex items-center justify-start flex-1 text-base font-bold text-green-500 gap-x-2">
+        <div class="flex flex-wrap items-center justify-start flex-1 text-base font-bold text-green-500 gap-x-2">
             {{-- dropdown kapal --}}
             <div class="relative dropdown-kapal">
                 <button id="dropdownSearchButtonKapal6" data-dropdown-toggle="dropdownSearchKapal6"
@@ -122,64 +122,40 @@
     @script
         <script>
             window.chart341 = null;
-            chart341 = Highcharts.chart('fig-chart341', {
-                chart: {
-                    type: 'column'
-                },
-                exporting: { // Menambahkan opsi export
-                    enabled: true, // Aktifkan tombol export
-                    buttons: {
-                        contextButton: {
-                            text: 'Unduh' // Text tombol export
-                        }
-                    }
-                },
-                title: {
-                    text: null,
-                    // align: 'left'
-                },
-                xAxis: {
-                    categories: ['USA', 'China', 'Brazil', 'EU', 'India', 'Russia'],
-                    crosshair: true,
-                    accessibility: {
-                        description: 'Countries'
+            chart341 =
+                Highcharts.chart('fig-chart341', {
+                    chart: {
+                        type: 'column'
                     },
                     title: {
-                        text: 'Negara'
-                    }
-                },
+                        text: 'Column chart with negative values'
+                    },
+                    xAxis: {
+                        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    // plotOptions: {
+                    //     column: {
+                    //         borderRadius: '25%'
+                    //     }
+                    // },
+                    series: [{
+                        name: 'John',
+                        data: [5, 3, 4, 7, 2]
+                    }, {
+                        name: 'Jane',
+                        data: [2, -2, -3, 2, 1]
+                    }, {
+                        name: 'Joe',
+                        data: [3, 4, 4, -2, 5]
+                    }]
+                });
 
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Banyak Kapal'
-                    }
-                },
-                tooltip: {
-                    valueSuffix: ''
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0
-                    }
-                },
-                series: [{
-                        name: 'Corn',
-                        data: [406292, 260000, 107000, 68300, 27500, 14500]
-                    },
-                    {
-                        name: 'Wheat',
-                        data: [51086, 136000, 5500, 141000, 107180, 77000]
-                    },
-                    {
-                        name: 'Rice',
-                        data: [20100, 20000, 10000, 10000, 10000, 10000]
-                    }
-                ]
-            });
 
             $wire.on('chart341Update', (data) => {
+                // console.log(data);
                 const monthsOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
                     'Dec'
                 ];
@@ -206,14 +182,17 @@
                 let prediksi = combinedData.map(item => item.prediksi);
                 let selisih = combinedData.map(item => item.selisih);
 
-                const chart = window.chart341; // Mengakses grafik yang ada
+                const chart = window.chart341;
                 if (chart) {
                     chart.update({
                         title: {
-                            text: 'Interpretasi Selisih dari Dua Line Chart'
+                            text: null
                         },
                         xAxis: {
-                            categories: categories
+                            categories: categories,
+                            title: {
+                                text: 'Bulan'
+                            }
                         },
                         yAxis: {
                             title: {
@@ -223,16 +202,33 @@
                         series: [{
                             name: 'Selisih',
                             type: 'column',
-                            data: selisih
+                            data: selisih,
+                            color: 'lightgrey',
+                            threshold: 0 // Menentukan threshold di 0 agar batang dengan nilai negatif ditampilkan ke arah bawah
                         }, {
                             name: 'Data BPS',
                             type: 'line',
-                            data: dataBps
+                            data: dataBps,
+                            color: 'blue',
                         }, {
                             name: 'Prediksi',
                             type: 'line',
-                            data: prediksi
-                        }]
+                            data: prediksi,
+                            color: 'orange'
+                        }],
+                        tooltip: {
+                            formatter: function() {
+                                let tooltip = '<b>' + this.x + '</b><br/>';
+                                tooltip += 'Data BPS: ' + Highcharts.numberFormat(this.points[1].y, 0, ' ',
+                                    ' ') + '<br/>';
+                                tooltip += 'Prediksi: ' + Highcharts.numberFormat(this.points[2].y, 0, ' ',
+                                    ' ') + '<br/>';
+                                tooltip += 'Selisih: ' + Highcharts.numberFormat(this.points[0].y, 0, ' ',
+                                    ' ');
+                                return tooltip;
+                            },
+                            shared: true
+                        }
                     });
                 }
             });

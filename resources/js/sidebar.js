@@ -1,6 +1,17 @@
 const sidebar = document.getElementById("sidebar");
-console.log("haloo");
+const sidebarBackdrop = document.getElementById("sidebarBackdrop");
+const toggleSidebarMobileHamburger = document.getElementById(
+    "toggleSidebarMobileHamburger"
+);
+const toggleSidebarMobileClose = document.getElementById(
+    "toggleSidebarMobileClose"
+);
+const toggleSidebarMobileEl = document.getElementById("toggleSidebarMobile");
+const toggleSidebarMobileSearch = document.getElementById(
+    "toggleSidebarMobileSearch"
+);
 
+// Function to toggle the sidebar
 const toggleSidebarMobile = (
     sidebar,
     sidebarBackdrop,
@@ -13,19 +24,27 @@ const toggleSidebarMobile = (
     toggleSidebarMobileClose.classList.toggle("hidden");
 };
 
-const toggleSidebarMobileEl = document.getElementById("toggleSidebarMobile");
-const sidebarBackdrop = document.getElementById("sidebarBackdrop");
-const toggleSidebarMobileHamburger = document.getElementById(
-    "toggleSidebarMobileHamburger"
-);
-const toggleSidebarMobileClose = document.getElementById(
-    "toggleSidebarMobileClose"
-);
-const toggleSidebarMobileSearch = document.getElementById(
-    "toggleSidebarMobileSearch"
-);
+// Initial check to hide sidebar on mobile
+const initialCheck = () => {
+    if (window.innerWidth < 768) {
+        // Adjust the width as needed for your breakpoint
+        sidebar.classList.add("hidden");
+        sidebarBackdrop.classList.add("hidden");
+        toggleSidebarMobileHamburger.classList.remove("hidden");
+        toggleSidebarMobileClose.classList.add("hidden");
+    } else {
+        sidebar.classList.remove("hidden");
+        sidebarBackdrop.classList.add("hidden");
+        toggleSidebarMobileHamburger.classList.add("hidden");
+        toggleSidebarMobileClose.classList.remove("hidden");
+    }
+};
 
-toggleSidebarMobileSearch.addEventListener("click", () => {
+// Run the initial check when the script loads
+initialCheck();
+
+// Add event listeners to toggle buttons
+toggleSidebarMobileEl.addEventListener("click", () => {
     toggleSidebarMobile(
         sidebar,
         sidebarBackdrop,
@@ -34,7 +53,7 @@ toggleSidebarMobileSearch.addEventListener("click", () => {
     );
 });
 
-toggleSidebarMobileEl.addEventListener("click", () => {
+toggleSidebarMobileSearch.addEventListener("click", () => {
     toggleSidebarMobile(
         sidebar,
         sidebarBackdrop,
@@ -51,3 +70,6 @@ sidebarBackdrop.addEventListener("click", () => {
         toggleSidebarMobileClose
     );
 });
+
+// Optional: Add a resize event listener to handle window resize
+window.addEventListener("resize", initialCheck);

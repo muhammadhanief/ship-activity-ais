@@ -146,7 +146,6 @@
 
             $wire.on('chart331Update', (data) => {
                 // console.log(data); // Memastikan data yang diterima sesuai
-
                 const chart = window.chart331; // Mengakses grafik yang ada
                 if (chart) {
                     const chartData = data[0]; // Mengambil data pertama dari array data

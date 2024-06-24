@@ -8,10 +8,11 @@ use App\Livewire\PerairanIndonesia;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/', MasukKeluar::class)->name('masuk-keluar');
 Route::get('/perairan-indonesia', PerairanIndonesia::class)->name('perairan-indonesia');
 Route::get('/kapal-indonesia', KapalIndonesia::class)->name('kapal-indonesia');
 Route::get('/masuk-keluar', MasukKeluar::class)->name('masuk-keluar');

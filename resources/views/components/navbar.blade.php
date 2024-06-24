@@ -19,7 +19,8 @@
                 </button>
                 <a href="#" class="text-xl font-bold flex items-center lg:ml-2.5">
                     <img src="{{ asset('img/stis_logo.png') }}" class="h-6 mr-2" alt="Windster Logo">
-                    <span class="self-center whitespace-nowrap">Monitoring Aktivitas Perkapalan</span>
+                    <span class="self-center whitespace-normal sm:whitespace-nowrap">Monitoring Aktivitas
+                        Perkapalan</span>
                 </a>
                 {{-- <form action="#" method="GET" class="hidden lg:block lg:pl-32">
                     <label for="topbar-search" class="sr-only">Search</label>
@@ -40,7 +41,7 @@
             </div>
             <div class="flex items-center">
                 <!-- Search mobile -->
-                <button id="toggleSidebarMobileSearch" type="button"
+                {{-- <button id="toggleSidebarMobileSearch" type="button"
                     class="p-2 text-gray-500 rounded-lg lg:hidden hover:text-gray-900 hover:bg-gray-100">
                     <span class="sr-only">Search</span>
                     <!-- Search icon -->
@@ -49,7 +50,7 @@
                             d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                             clip-rule="evenodd"></path>
                     </svg>
-                </button>
+                </button> --}}
                 <div class="items-center hidden lg:flex">
                     <span class="mr-5 text-base font-normal text-gray-500 ">Ladisa Busaina ❤️</span>
                     <div class="-mb-1">

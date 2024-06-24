@@ -76,14 +76,11 @@ class Chart331 extends Component
             }
         }
 
+        // dd($formattedData);
+
         $this->dispatch('chart331Update', $formattedData);
     }
 
-
-
-    public function getChartData()
-    {
-    }
 
     public function render()
     {

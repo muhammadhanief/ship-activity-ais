@@ -9,7 +9,7 @@
                 Tipe Kapal</span>
             {{-- <h3 class="text-base font-normal text-gray-500">Sales this week</h3> --}}
         </div>
-        <div class="flex items-center justify-start flex-1 text-base font-bold text-green-500 gap-x-2">
+        <div class="flex flex-wrap items-center justify-start flex-1 text-base font-bold text-green-500 gap-x-2">
             {{-- dropdown kapal --}}
             <div class="relative dropdown-kapal">
                 <button id="dropdownSearchButtonKapal3" data-dropdown-toggle="dropdownSearchKapal3"
@@ -121,71 +121,109 @@
     </div>
     @script
         <script>
-            // Inisialisasi grafik Highcharts dengan null
             window.chart321 = null;
-
-            // Memindahkan inisialisasi grafik ke dalam event Livewire
-            $wire.on('chart321Awal', (data) => {
-                // console.log(data);
-                // Inisialisasi grafik Highcharts
-                chart321 = Highcharts.chart('fig-chart321', {
-                    chart: {
-                        type: 'column'
-                    },
-                    exporting: {
-                        enabled: true,
-                        buttons: {
-                            contextButton: {
-                                text: 'Unduh'
-                            }
+            chart321 = Highcharts.chart('fig-chart321', {
+                chart: {
+                    type: 'column'
+                },
+                exporting: { // Menambahkan opsi export
+                    enabled: true, // Aktifkan tombol export
+                    buttons: {
+                        contextButton: {
+                            text: 'Unduh' // Text tombol export
                         }
+                    }
+                },
+                title: {
+                    text: null,
+                    // align: 'left'
+                },
+                xAxis: {
+                    categories: [
+                        "Tanker",
+                        "Cargo",
+                        "Passenger",
+                        "Other",
+                        "Sailing",
+                        "Dredging",
+                        "Pleasure Craft",
+                        "Fishing",
+                        "Port Tender"
+                    ],
+                    crosshair: true,
+                    accessibility: {
+                        description: 'Countries'
                     },
                     title: {
-                        text: null
-                    },
-                    xAxis: {
-                        categories: data[0].chartData.categories, // Menggunakan kategori dari data Livewire
-                        crosshair: true,
-                        accessibility: {
-                            description: 'Countries'
-                        },
-                        title: {
-                            text: 'Tipe Kapal'
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: 'Banyak Kapal'
-                        }
-                    },
-                    tooltip: {
-                        valueSuffix: ''
-                    },
-                    plotOptions: {
-                        column: {
-                            pointPadding: 0.2,
-                            borderWidth: 0
-                        }
-                    },
-                });
+                        text: 'Negara'
+                    }
+                },
 
-                // Memperbarui series grafik dengan data dari Livewire
-                chart321.update({
-                    series: data[0].chartData.series
-                }, true, true);
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Banyak Kapal'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                        name: 'Corn',
+                        data: [
+                            283659,
+                            200478,
+                            89654,
+                            68050,
+                            3007,
+                            2189,
+                            1436,
+                            514,
+                            159
+                        ],
+                    },
+                    {
+                        name: 'Wheat',
+                        data: [
+                            283793,
+                            200992,
+                            89852,
+                            68076,
+                            3067,
+                            2182,
+                            1347,
+                            538,
+                            159
+                        ],
+                    }
+                ]
             });
 
-            $wire.on('chart321Update', (data) => {
-                // console.log(data);
-                const chart = window.chart321;
+
+            $wire.on('chart321Update', (datanya) => {
+                const chart = window.chart321; // Mengakses grafik yang ada
+                // console.log(datanya); // Memastikan data yang diterima sesuai
                 if (chart) {
-                    const chartData = data[0].chartData; // Menyesuaikan dengan struktur data yang diterima
+                    const chartData = datanya[0]; // Mengambil data pertama dari array data
+
+                    // Mendapatkan kategori dari data yang diterima
+                    const categories = chartData.categories;
+
+                    // Mendapatkan series dari data yang diterima
+                    const seriesData = chartData.series;
+
+                    // Memperbarui grafik dengan data yang diterima
                     chart.update({
                         xAxis: {
-                            categories: chartData.categories
+                            categories: categories // Mengupdate kategori pada sumbu x
                         },
-                        series: chartData.series
+                        series: seriesData // Mengupdate data series
                     }, true, true);
                 }
             });
