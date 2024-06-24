@@ -59,7 +59,6 @@ class Chart341 extends Component
             ->groupBy('Bulan')
             ->orderByRaw("FIELD(Bulan, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')")
             ->get();
-
         $categories = [];
         $dataBPS = [];
         $prediksi = [];
