@@ -124,14 +124,21 @@
 
 
             $wire.on('chart511Update', (datanya) => {
-                console.log(datanya); // Memastikan data yang diterima sesuai
+                // console.log(datanya); // Memastikan data yang diterima sesuai
 
                 const chart = window.chart511; // Mengakses grafik yang ada
                 if (chart) {
                     const chartData = datanya[0]; // Mengambil data pertama dari array data
 
                     const categories = chartData.categories; // Mengambil kategori dari data
-                    const seriesData = chartData.series; // Mengambil data series dari data
+
+                    // Mengonversi data series menjadi bilangan bulat
+                    const seriesData = chartData.series.map(series => ({
+                        name: series.name,
+                        type: series.type,
+                        data: series.data.map(value => parseInt(value,
+                            10)) // Mengonversi setiap nilai menjadi bilangan bulat
+                    }));
 
                     // Memperbarui grafik dengan data yang diterima
                     chart.update({
@@ -146,7 +153,10 @@
                                 text: 'Banyak Kapal'
                             }
                         },
-                        series: seriesData
+                        series: seriesData,
+                        tooltip: {
+                            shared: true // Menampilkan tooltip untuk kedua series saat dihover
+                        },
                     }, true, true);
                 }
             });

@@ -5,7 +5,7 @@
         class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">dd</button> --}}
     <div class="flex flex-col mb-4">
         <div class="flex-shrink-0 pb-2">
-            <span class="text-xl font-bold leading-none text-gray-900 ">Mean & Median Durasi Kapal di Pelabuhan
+            <span class="text-xl font-bold leading-none text-gray-900 ">Mean Durasi Kapal di Pelabuhan
                 Indonesia Negara Asal</span>
             {{-- <h3 class="text-base font-normal text-gray-500">Sales this week</h3> --}}
         </div>
@@ -168,17 +168,21 @@
                     }
                 },
                 series: [{
-                    name: 'Series 1', // Nama series pertama
-                    data: [500, 700, 600, 800, 900, 700] // Data dummy untuk series pertama
-                }, {
-                    name: 'Series 2', // Nama series kedua
-                    data: [300, 400, 350, 500, 600, 450] // Data dummy untuk series kedua
-                }]
+                        name: 'Series 1', // Nama series pertama
+                        data: [500, 700, 600, 800, 900, 700] // Data dummy untuk series pertama
+                    },
+                    {
+                        name: 'Series 2', // Nama series kedua
+                        data: [300, 400, 350, 500, 600, 450] // Data dummy untuk series kedua
+                    }
+                ]
             });
             $wire.on('chart412Update', (data) => {
                 const categories = data[0].categories.map(item => item.trim());
-                const medianDurasi = data[0].series[0].data;
-                const rataRataDurasi = data[0].series[1].data;
+                const medianDurasi = data[0].series[0].data.map(value => parseFloat(value).toFixed(2));
+                const rataRataDurasi = data[0].series[1].data.map(value => parseFloat(value).toFixed(2));
+
+                console.log(categories, medianDurasi, rataRataDurasi);
 
                 const chart = window.chart412;
                 if (chart) {
@@ -199,12 +203,12 @@
                         },
                         series: [{
                             name: 'Median Durasi',
-                            data: medianDurasi
+                            data: medianDurasi.map(val => parseFloat(val))
                         }, {
                             name: 'Rata-rata Durasi',
-                            data: rataRataDurasi
+                            data: rataRataDurasi.map(val => parseFloat(val))
                         }]
-                    });
+                    }, true, true);
                 }
             });
         </script>

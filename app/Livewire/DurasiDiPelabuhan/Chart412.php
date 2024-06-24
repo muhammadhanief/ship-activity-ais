@@ -55,12 +55,16 @@ class Chart412 extends Component
                 ]
             ];
         } else {
-            $query = MeanMedianDurasiIndoPerNegaraKapal::selectRaw('Negara_Kapal, SUM(Rata_Rata_Durasi) AS total_rataRataDurasi, SUM(Median_Durasi) AS total_medianDurasi')
+            $query = MeanMedianDurasiIndoPerNegaraKapal::selectRaw('Negara_Kapal, 
+            GROUP_CONCAT(Median_Durasi ORDER BY Median_Durasi) AS all_medianDurasi, 
+            COUNT(Median_Durasi) AS count_medianDurasi,
+            SUM(Median_Durasi) AS total_medianDurasi,
+            AVG(Rata_Rata_Durasi) AS avg_rataRataDurasi')
                 ->whereIn('Pendekatan', $this->selectedPendekatan)
                 ->whereIn('Pelabuhan', $this->selectedPelabuhan)
                 ->whereIn('Satuan', $this->selectedSatuan)
                 ->groupBy('Negara_Kapal')
-                ->orderByDesc('total_medianDurasi')
+                ->orderByDesc('avg_rataRataDurasi')
                 ->limit(10)
                 ->get();
 
@@ -73,9 +77,14 @@ class Chart412 extends Component
             ];
 
             foreach ($query as $item) {
+                // Menghitung median dari all_medianDurasi
+                $medianData = explode(',', $item->all_medianDurasi);
+                $count = $item->count_medianDurasi;
+                $median = $count % 2 == 0 ? ($medianData[$count / 2 - 1] + $medianData[$count / 2]) / 2 : $medianData[floor($count / 2)];
+
                 $formattedData['categories'][] = $item->Negara_Kapal;
-                $formattedData['series'][0]['data'][] = (float) $item->total_medianDurasi;
-                $formattedData['series'][1]['data'][] = (float) $item->total_rataRataDurasi;
+                $formattedData['series'][0]['data'][] = (float) $median;
+                $formattedData['series'][1]['data'][] = (float) $item->avg_rataRataDurasi;
             }
         }
 

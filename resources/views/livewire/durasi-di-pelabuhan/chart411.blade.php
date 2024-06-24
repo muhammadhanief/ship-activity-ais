@@ -209,8 +209,6 @@
                 }]
             });
             $wire.on('chart411Update', (data) => {
-
-
                 // Mapping data categories ke bulan
                 const monthOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -238,11 +236,13 @@
                         series: [{
                             name: 'Median Durasi',
                             type: 'line',
-                            data: medianDurasi
+                            data: medianDurasi.map(v => parseInt(v,
+                                10)) // Mengubah medianDurasi menjadi bilangan bulat
                         }, {
                             name: 'Rata-rata Durasi',
                             type: 'line',
-                            data: rataRataDurasi
+                            data: rataRataDurasi.map(v => parseInt(v,
+                                10)) // Mengubah rataRataDurasi menjadi bilangan bulat
                         }],
                         tooltip: {
                             shared: true, // Mengaktifkan shared tooltip agar semua label ditampilkan

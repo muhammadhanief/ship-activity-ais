@@ -194,8 +194,8 @@
             });
             $wire.on('chart421Update', (data) => {
                 const categories = data[0].categories.map(item => item.trim());
-                const medianDurasi = data[0].series[0].data;
-                const rataRataDurasi = data[0].series[1].data;
+                const medianDurasi = data[0].series[0].data.map(value => parseFloat(parseFloat(value).toFixed(2)));
+                const rataRataDurasi = data[0].series[1].data.map(value => parseFloat(parseFloat(value).toFixed(2)));
 
                 const chart = window.chart421;
                 if (chart) {
