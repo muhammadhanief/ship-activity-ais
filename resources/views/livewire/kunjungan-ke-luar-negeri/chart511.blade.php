@@ -5,48 +5,17 @@
         class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">dd</button> --}}
     <div class="flex flex-col mb-4">
         <div class="flex-shrink-0 pb-2">
-            <span class="text-xl font-bold leading-none text-gray-900 ">Kapal Masuk-Keluar Pelabuhan Indonesia Menurut
-                Tipe Kapal</span>
+            <span class="text-xl font-bold leading-none text-gray-900 ">Kunjungan ke Luar Negeri</span>
             {{-- <h3 class="text-base font-normal text-gray-500">Sales this week</h3> --}}
         </div>
         <div class="flex flex-wrap items-center justify-start flex-1 text-base font-bold text-green-500 gap-x-2">
-            {{-- dropdown kapal --}}
-            <div class="relative dropdown-kapal">
-                <button id="dropdownSearchButtonKapal3" data-dropdown-toggle="dropdownSearchKapal3"
-                    class="inline-flex items-center px-4 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="button" aria-haspopup="true" aria-expanded="false"
-                    onclick="toggleDropdown('dropdownSearchKapal3');">
-                    Kapal
-                    <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 4 4 4-4" />
-                    </svg>
-                </button>
-                <div wire:ignore id="dropdownSearchKapal3"
-                    class="absolute right-0 z-20 hidden mt-2 bg-white rounded-lg shadow w-60 dark:bg-gray-700">
-                    <ul class="h-48 px-3 pb-3 overflow-y-auto text-xs text-gray-700 dark:text-gray-200">
-                        @foreach ($kapalOptions as $kapalOption)
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input wire:model.live='selectedKapal' id="kapal-{{ $loop->index }}"
-                                        type="checkbox" value="{{ $kapalOption }}"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="kapal-{{ $loop->index }}"
-                                        class="w-full text-xs font-medium text-gray-900 rounded ms-2 dark:text-gray-300">{{ $kapalOption }}</label>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-            {{-- end kapal --}}
+
             {{-- Dropdown selectedPendekatan --}}
             <div class="relative dropdown-pendekatan">
-                <button id="dropdownSearchButtonPendekatan3" data-dropdown-toggle="dropdownSearchPendekatan3"
+                <button id="dropdownSearchButtonPendekatan" data-dropdown-toggle="dropdownSearchPendekatan"
                     class="inline-flex items-center px-4 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button" aria-haspopup="true" aria-expanded="false"
-                    onclick="toggleDropdown('dropdownSearchPendekatan3');">
+                    onclick="toggleDropdown('dropdownSearchPendekatan');">
                     Pendekatan
                     <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 10 6">
@@ -54,7 +23,7 @@
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
-                <div wire:ignore id="dropdownSearchPendekatan3"
+                <div wire:ignore id="dropdownSearchPendekatan"
                     class="absolute right-0 z-20 hidden mt-2 bg-white rounded-lg shadow w-60 dark:bg-gray-700">
                     <ul class="h-48 px-3 pb-3 overflow-y-auto text-xs text-gray-700 dark:text-gray-200">
                         @foreach ($pendekatanOptions as $pendekatanOption)
@@ -74,10 +43,10 @@
             {{-- End Dropdown selectedPendekatan --}}
             {{-- dropdown pelabuhan --}}
             <div class="relative dropdown-pelabuhan">
-                <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearchPelabuhan3"
+                <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearchPelabuhan"
                     class="inline-flex items-center px-4 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button" aria-haspopup="true" aria-expanded="false"
-                    onclick="toggleDropdown('dropdownSearchPelabuhan3');">
+                    onclick="toggleDropdown('dropdownSearchPelabuhan');">
                     Pelabuhan
                     <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 10">
@@ -85,7 +54,7 @@
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
-                <div wire:ignore id="dropdownSearchPelabuhan3"
+                <div wire:ignore id="dropdownSearchPelabuhan"
                     class="absolute right-0 z-50 hidden mt-2 bg-white rounded-lg shadow w-60 dark:bg-gray-700">
                     <ul class="h-48 px-3 pb-3 overflow-y-auto text-xs text-gray-700 dark:text-gray-200"
                         aria-labelledby="dropdownSearchButton">
@@ -117,113 +86,67 @@
         </div>
     </div>
     <div wire:ignore>
-        <div id="fig-chart321"></div>
+        <div id="fig-chart511"></div>
     </div>
     @script
         <script>
-            window.chart321 = null;
-            chart321 = Highcharts.chart('fig-chart321', {
-                chart: {
-                    type: 'column'
-                },
-                exporting: { // Menambahkan opsi export
-                    enabled: true, // Aktifkan tombol export
-                    buttons: {
-                        contextButton: {
-                            text: 'Unduh' // Text tombol export
-                        }
-                    }
-                },
-                title: {
-                    text: null,
-                    // align: 'left'
-                },
-                xAxis: {
-                    categories: [
-                        "Tanker",
-                        "Cargo",
-                        "Passenger",
-                        "Other",
-                        "Sailing",
-                        "Dredging",
-                        "Pleasure Craft",
-                        "Fishing",
-                        "Port Tender"
-                    ],
-                    crosshair: true,
-                    accessibility: {
-                        description: 'Countries'
+            window.chart511 = null;
+            chart511 =
+                Highcharts.chart('fig-chart511', {
+                    chart: {
+                        type: 'column'
                     },
                     title: {
-                        text: 'Tipe Kapal'
-                    }
-                },
-
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Banyak Kapal'
-                    }
-                },
-                tooltip: {
-                    valueSuffix: ''
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0
-                    }
-                },
-                series: [{
-                        name: 'Kapal Masuk',
-                        data: [
-                            283659,
-                            200478,
-                            89654,
-                            68050,
-                            3007,
-                            2189,
-                            1436,
-                            514,
-                            159
-                        ],
+                        text: null,
                     },
-                    {
-                        name: 'Kapal Keluar',
-                        data: [
-                            283793,
-                            200992,
-                            89852,
-                            68076,
-                            3067,
-                            2182,
-                            1347,
-                            538,
-                            159
-                        ],
-                    }
-                ]
-            });
+                    xAxis: {
+                        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    // plotOptions: {
+                    //     column: {
+                    //         borderRadius: '25%'
+                    //     }
+                    // },
+                    series: [{
+                        name: 'John',
+                        data: [5, 3, 4, 7, 2]
+                    }, {
+                        name: 'Jane',
+                        data: [2, -2, -3, 2, 1]
+                    }, {
+                        name: 'Joe',
+                        data: [3, 4, 4, -2, 5]
+                    }]
+                });
 
 
-            $wire.on('chart321Update', (datanya) => {
-                const chart = window.chart321; // Mengakses grafik yang ada
-                // console.log(datanya); // Memastikan data yang diterima sesuai
+            $wire.on('chart511Update', (datanya) => {
+                console.log(datanya); // Memastikan data yang diterima sesuai
+
+                const chart = window.chart511; // Mengakses grafik yang ada
                 if (chart) {
                     const chartData = datanya[0]; // Mengambil data pertama dari array data
 
-                    // Mendapatkan kategori dari data yang diterima
-                    const categories = chartData.categories;
-
-                    // Mendapatkan series dari data yang diterima
-                    const seriesData = chartData.series;
+                    const categories = chartData.categories; // Mengambil kategori dari data
+                    const seriesData = chartData.series; // Mengambil data series dari data
 
                     // Memperbarui grafik dengan data yang diterima
                     chart.update({
                         xAxis: {
-                            categories: categories // Mengupdate kategori pada sumbu x
+                            categories: categories,
+                            title: {
+                                text: 'Bulan'
+                            }
                         },
-                        series: seriesData // Mengupdate data series
+                        yAxis: {
+                            title: {
+                                text: 'Banyak Kapal'
+                            }
+                        },
+                        series: seriesData
                     }, true, true);
                 }
             });
