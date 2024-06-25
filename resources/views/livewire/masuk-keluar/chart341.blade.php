@@ -196,7 +196,7 @@
                         },
                         yAxis: {
                             title: {
-                                text: 'Banyak Kapal'
+                                text: 'Jumlah Kapal'
                             }
                         },
                         series: [{

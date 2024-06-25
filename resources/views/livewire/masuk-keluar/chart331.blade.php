@@ -121,7 +121,7 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Banyak Kapal'
+                        text: 'Jumlah Kapal'
                     }
                 },
                 tooltip: {
@@ -156,6 +156,10 @@
                             categories: chartData.categories // Mengupdate kategori pada sumbu x
                         },
                         series: chartData.series // Mengupdate data series
+                            ,
+                        tooltip: {
+                            shared: true // Menampilkan tooltip untuk kedua series saat dihover
+                        }
                     }, true, true);
                 }
             });

@@ -184,7 +184,7 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Banyak Kapal'
+                        text: 'Durasi'
                     }
                 },
                 tooltip: {

@@ -150,7 +150,7 @@
                         },
                         yAxis: {
                             title: {
-                                text: 'Banyak Kapal' // Mengubah label sumbu Y menjadi 'Durasi'
+                                text: 'Jumlah Kapal' // Mengubah label sumbu Y menjadi 'Durasi'
                             }
                         },
                         series: seriesData,

@@ -220,7 +220,10 @@
                         }, {
                             name: 'Rata-rata Durasi',
                             data: rataRataDurasi
-                        }]
+                        }],
+                        tooltip: {
+                            shared: true // Menampilkan tooltip untuk kedua series saat dihover
+                        }
                     });
                 }
             });

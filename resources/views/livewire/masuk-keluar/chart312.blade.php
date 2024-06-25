@@ -221,7 +221,10 @@
                         ['Safari', 10.0],
                         ['Others', 20.0]
                     ]
-                }]
+                }],
+                // tooltip: {
+                //     shared: true // Menampilkan tooltip untuk kedua series saat dihover
+                // }
             });
 
 

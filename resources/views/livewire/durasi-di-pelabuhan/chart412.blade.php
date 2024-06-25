@@ -207,7 +207,10 @@
                         }, {
                             name: 'Rata-rata Durasi',
                             data: rataRataDurasi.map(val => parseFloat(val))
-                        }]
+                        }],
+                        tooltip: {
+                            shared: true // Menampilkan tooltip untuk kedua series saat dihover
+                        }
                     }, true, true);
                 }
             });

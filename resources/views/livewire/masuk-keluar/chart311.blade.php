@@ -203,6 +203,14 @@
                     axisTicks: {
                         color: "#F3F4F6",
                     },
+                    title: { // Menambahkan title pada sumbu X
+                        text: "Bulan",
+                        style: {
+                            // color: "Black",
+                            // fontSize: "16px",
+                            fontWeight: 400,
+                        },
+                    },
                 },
                 yaxis: {
                     labels: {
@@ -213,6 +221,14 @@
                         },
                         formatter: function(value) {
                             return value;
+                        },
+                    },
+                    title: { // Menambahkan title pada sumbu X
+                        text: "Jumlah Kapal",
+                        style: {
+                            // color: "Black",
+                            // fontSize: "16px",
+                            fontWeight: 400,
                         },
                     },
                 },
