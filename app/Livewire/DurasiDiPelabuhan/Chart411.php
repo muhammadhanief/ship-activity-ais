@@ -52,50 +52,43 @@ class Chart411 extends Component
 
     public function getChartData()
     {
-        $query = MeanMedianDurasiIndoPerBulan::selectRaw('Bulan, 
-        GROUP_CONCAT(Median_Durasi ORDER BY Median_Durasi) AS all_medianDurasi, 
-        COUNT(Median_Durasi) AS count_medianDurasi,
-        AVG(Rata_Rata_Durasi) AS avg_rataRataDurasi')
-            ->when($this->selectedPendekatan, function ($query) {
-                $query->whereIn('Pendekatan', $this->selectedPendekatan);
-            })
-            ->when($this->selectedKapal, function ($query) {
-                $query->whereIn('Kapal', $this->selectedKapal);
-            })
-            ->when($this->selectedSatuan, function ($query) {
-                $query->whereIn('Satuan', $this->selectedSatuan);
-            })
-            ->when($this->selectedPelabuhan, function ($query) {
-                $query->whereIn('Pelabuhan', $this->selectedPelabuhan);
-            })
-            ->groupBy('Bulan')
-            ->orderBy('Bulan')
-            ->get();
+        // Implementasikan query untuk mendapatkan data dari tabel MeanMedianDurasiIndoPerBulan
+        $data = MeanMedianDurasiIndoPerBulan::query();
 
-        $categories = [];
-        $medianDurasi = [];
-        $rataRataDurasi = [];
-
-        foreach ($query as $item) {
-            // Menghitung median dari all_medianDurasi
-            $medianData = explode(',', $item->all_medianDurasi);
-            $count = $item->count_medianDurasi;
-            $median = $count % 2 == 0 ? ($medianData[$count / 2 - 1] + $medianData[$count / 2]) / 2 : $medianData[floor($count / 2)];
-
-            $categories[] = $item->Bulan;
-            $medianDurasi[] = (float) $median;
-            $rataRataDurasi[] = (float) $item->avg_rataRataDurasi;
+        // Filter berdasarkan selectedPendekatan
+        if (!empty($this->selectedPendekatan)) {
+            $data->whereIn('Pendekatan', $this->selectedPendekatan);
         }
 
+        // Filter berdasarkan selectedKapal
+        if (!empty($this->selectedKapal)) {
+            $data->whereIn('Kapal', $this->selectedKapal);
+        }
+
+        // Filter berdasarkan selectedSatuan
+        if (!empty($this->selectedSatuan)) {
+            $data->whereIn('Satuan', $this->selectedSatuan);
+        }
+
+        // Filter berdasarkan selectedPelabuhan
+        if (!empty($this->selectedPelabuhan)) {
+            $data->whereIn('Pelabuhan', $this->selectedPelabuhan);
+        }
+
+        // Ambil data untuk median durasi dan rata-rata durasi per bulan
+        $data = $data->selectRaw('Bulan, SUM(Median_Durasi) as Sum_Median_Durasi, SUM(Rata_Rata_Durasi) as Sum_Rata_Rata_Durasi')
+            ->groupBy('Bulan')
+            ->get();
+
+        // Format data untuk chart
         $chartData = [
-            'categories' => $categories,
-            'medianDurasi' => $medianDurasi,
-            'rataRataDurasi' => $rataRataDurasi,
+            'categories' => $data->pluck('Bulan')->toArray(),
+            'medianDurasi' => $data->pluck('Sum_Median_Durasi')->toArray(),
+            'rataRataDurasi' => $data->pluck('Sum_Rata_Rata_Durasi')->toArray(),
         ];
 
         return $chartData;
     }
-
 
     public function dispatch411()
     {

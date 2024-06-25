@@ -9,7 +9,7 @@
                 Tipe Kapal</span>
             {{-- <h3 class="text-base font-normal text-gray-500">Sales this week</h3> --}}
         </div>
-        <div class="flex flex-wrap items-center justify-start flex-1 text-base font-bold text-green-500 gap-x-2">
+        <div class="flex flex-wrap items-center justify-start flex-1 gap-2 text-base font-bold text-green-500">
             {{-- dropdown kapal --}}
             <div class="relative dropdown-kapal">
                 <button id="dropdownSearchButtonKapal6" data-dropdown-toggle="dropdownSearchKapal6"
